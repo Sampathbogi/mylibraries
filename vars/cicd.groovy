@@ -9,5 +9,5 @@ def newMaven()
 }
 def newDeploy(jobname,ip,context)
 {
-  sh "scp /home/ubuntu/.jenkins/wokspace/${jobname}/webapp/target/webapp.war ubuntu@${ip}:/var/lib/tomcat9/webapps/${context}.war"
+  deploy adapters: [tomcat9(credentialsId: "${credentials}", path: '', url: "${ip}")], contextPath: ${context}, war: '**/*.war'
 }
